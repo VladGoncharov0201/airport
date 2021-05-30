@@ -1,4 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QWidget, QGridLayout
+
 import MainPage
 import PageThisTable
 import AddInformationPage
@@ -13,7 +15,40 @@ class viewTable(QtWidgets.QMainWindow, PageThisTable.Ui_MainWindow):
         self.new_window = None
         self.setupUi(self)
 
+        self.workthisdb()
+
         self.back.clicked.connect(self.gotomainwindow)
+
+    def workthisdb(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select passengers.passenger_id, passengers.surname, passengers.name," \
+                     " passengers.passport_data,flights.flight_id, flights.departure, flights.arrival," \
+                     " flights.flight_time, flights.number_of_transfers, flights.state from airport.passengers " \
+                     "inner join airport.tickets on airport.passengers.passenger_id = airport.tickets.passenger_id " \
+                     "inner join airport.flights on airport.flights.flight_id = airport.tickets.flight_id"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(10)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            self.tableWidget.resizeColumnsToContents()
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
 
     def gotomainwindow(self):
         self.new_window = mainPage()

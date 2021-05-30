@@ -61,6 +61,81 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>1021</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1021</width>
+      <height>0</height>
+     </size>
+    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>115</number>
+    </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>49</number>
+    </attribute>
+    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>id</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>surname</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>passport</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>flight_id</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>departure</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>arrival</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>flight_time</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>number_of_transfers</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>state</string>
+     </property>
+    </column>
+   </widget>
   </widget>
  </widget>
  <resources/>
