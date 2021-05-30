@@ -55,55 +55,86 @@
      </font>
     </property>
     <property name="text">
-     <string>Данные</string>
+     <string>Таблица с данными</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="info_about_client">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>220</y>
-      <width>951</width>
-      <height>61</height>
+      <x>20</x>
+      <y>110</y>
+      <width>1021</width>
+      <height>501</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Times New Roman</family>
-      <pointsize>17</pointsize>
-     </font>
+    <property name="minimumSize">
+     <size>
+      <width>1021</width>
+      <height>0</height>
+     </size>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(176, 224, 230)</string>
-    </property>
-    <property name="text">
-     <string>Информация о пассажирах, их место, откуда и куда пассажир летит</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="inf_about_pilot">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>370</y>
-      <width>951</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Times New Roman</family>
-      <pointsize>17</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(176, 224, 230)</string>
-    </property>
-    <property name="text">
-     <string>Информация о самолете и пилоте</string>
-    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>115</number>
+    </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>49</number>
+    </attribute>
+    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>pilot_id</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>surname</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>education</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>experience</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>flight_id</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>departure</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>arrival</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>flight_time</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>number_of_transfers</string>
+     </property>
+    </column>
    </widget>
   </widget>
  </widget>

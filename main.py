@@ -6,7 +6,55 @@ import AddInformationPage
 import RemoveInformationPage
 import UpdateInformationPage
 import ClientsPage
+import PilotsPage
 from db import connection
+
+
+class pilotspage(QtWidgets.QMainWindow, PilotsPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.workthisdb()
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def workthisdb(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select pilots.pilot_id, pilots.surname, pilots.name, pilots.education, pilots.experience," \
+                     " flights.flight_id, flights.departure, flights.arrival, flights.flight_time," \
+                     " flights.number_of_transfers from airport.pilots inner join airport.flight_information" \
+                     " on airport.pilots.pilot_id = airport.flight_information.pilot_id" \
+                     " inner join airport.flights on airport.flights.flight_id = airport.flight_information.flight_id"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(10)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            self.tableWidget.resizeColumnsToContents()
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = mainPage()
+        self.new_window.show()
+        self.close()
 
 
 class clientpage(QtWidgets.QMainWindow, ClientsPage.Ui_MainWindow):
@@ -64,9 +112,15 @@ class viewTable(QtWidgets.QMainWindow, PageThisTable.Ui_MainWindow):
 
         self.back.clicked.connect(self.gotomainwindow)
         self.info_about_client.clicked.connect(self.open_info_about_client)
+        self.inf_about_pilot.clicked.connect(self.open_info_about_pilot)
 
     def open_info_about_client(self):
         self.new_window = clientpage()
+        self.new_window.show()
+        self.close()
+
+    def open_info_about_pilot(self):
+        self.new_window = pilotspage()
         self.new_window.show()
         self.close()
 

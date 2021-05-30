@@ -61,4 +61,4 @@ class Ui_MainWindow(object):
         self.back.setText(_translate("MainWindow", "Назад"))
         self.label.setText(_translate("MainWindow", "Данные"))
         self.info_about_client.setText(_translate("MainWindow", "Информация о пассажирах, их место, откуда и куда пассажир летит"))
-        self.inf_about_pilot.setText(_translate("MainWindow", "Информация о самолете, пилоте и борт проводнике"))
+        self.inf_about_pilot.setText(_translate("MainWindow", "Информация о самолете и пилоте"))
