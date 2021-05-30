@@ -63,7 +63,7 @@ class Ui_MainWindow(object):
         self.ok.setStyleSheet("background-color: rgb(176, 224, 230)")
         self.ok.setObjectName("ok")
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(210, 230, 611, 361))
+        self.tableWidget.setGeometry(QtCore.QRect(210, 230, 661, 361))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(6)
         self.tableWidget.setRowCount(0)

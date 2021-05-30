@@ -21,10 +21,37 @@ class addairplanepage(QtWidgets.QMainWindow, AddAirplanePage.Ui_MainWindow):
         self.new_window = None
         self.setupUi(self)
 
+        self.showtable()
+
         self.back.clicked.connect(self.gotomainwindow)
 
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.airplanes"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(3)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
     def gotomainwindow(self):
-        self.new_window = mainPage()
+        self.new_window = addInformation()
         self.new_window.show()
         self.close()
 
@@ -35,10 +62,37 @@ class addclientpage(QtWidgets.QMainWindow, AddClientPage.Ui_MainWindow):
         self.new_window = None
         self.setupUi(self)
 
+        self.showtable()
+
         self.back.clicked.connect(self.gotomainwindow)
 
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.passengers"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(4)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
     def gotomainwindow(self):
-        self.new_window = mainPage()
+        self.new_window = addInformation()
         self.new_window.show()
         self.close()
 
@@ -49,10 +103,37 @@ class addstewardesspage(QtWidgets.QMainWindow, AddStewardessPage.Ui_MainWindow):
         self.new_window = None
         self.setupUi(self)
 
+        self.showtable()
+
         self.back.clicked.connect(self.gotomainwindow)
 
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.stewardesses"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(5)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
     def gotomainwindow(self):
-        self.new_window = mainPage()
+        self.new_window = addInformation()
         self.new_window.show()
         self.close()
 
@@ -63,10 +144,62 @@ class addpilotpage(QtWidgets.QMainWindow, AddPilotPage.Ui_MainWindow):
         self.new_window = None
         self.setupUi(self)
 
+        self.showtable()
+
+        self.ok.clicked.connect(self.add)
         self.back.clicked.connect(self.gotomainwindow)
 
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.pilots"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(6)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def add(self):
+        pilot_id = self.lineEdit.text()
+        surname = self.lineEdit_2.text()
+        name = self.lineEdit_3.text()
+        education = self.lineEdit_4.text()
+        experience = self.lineEdit_5.text()
+        phone = self.lineEdit_6.text()
+
+        connect = connection()
+        cursor = connect.cursor()
+
+        insert = "insert into airport.pilots" \
+                 " (pilot_id, surname, name, education, experience, phone_number) VALUES (%s, %s, %s, %s, %s, %s)"
+        value = (pilot_id, surname, name, education, experience, phone)
+
+        cursor.execute(insert, value)
+
+        connect.commit()
+
+        cursor.close()
+        connect.close()
+
+        self.showtable()
+
     def gotomainwindow(self):
-        self.new_window = mainPage()
+        self.new_window = addInformation()
         self.new_window.show()
         self.close()
 
@@ -114,7 +247,7 @@ class stewardesspage(QtWidgets.QMainWindow, StewardessPage.Ui_MainWindow):
             print("Произашла ошибка, попробуйет позже")
 
     def gotomainwindow(self):
-        self.new_window = mainPage()
+        self.new_window = viewTable()
         self.new_window.show()
         self.close()
 
@@ -161,7 +294,7 @@ class pilotspage(QtWidgets.QMainWindow, PilotsPage.Ui_MainWindow):
             print("Произашла ошибка, попробуйет позже")
 
     def gotomainwindow(self):
-        self.new_window = mainPage()
+        self.new_window = viewTable()
         self.new_window.show()
         self.close()
 
@@ -208,7 +341,7 @@ class clientpage(QtWidgets.QMainWindow, ClientsPage.Ui_MainWindow):
             print("Произашла ошибка, попробуйет позже")
 
     def gotomainwindow(self):
-        self.new_window = mainPage()
+        self.new_window = viewTable()
         self.new_window.show()
         self.close()
 
