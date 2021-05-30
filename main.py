@@ -8,7 +8,67 @@ import UpdateInformationPage
 import ClientsPage
 import PilotsPage
 import StewardessPage
+import AddPilotPage
+import AddStewardessPage
+import AddClientPage
+import AddAirplanePage
 from db import connection
+
+
+class addairplanepage(QtWidgets.QMainWindow, AddAirplanePage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def gotomainwindow(self):
+        self.new_window = mainPage()
+        self.new_window.show()
+        self.close()
+
+
+class addclientpage(QtWidgets.QMainWindow, AddClientPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def gotomainwindow(self):
+        self.new_window = mainPage()
+        self.new_window.show()
+        self.close()
+
+
+class addstewardesspage(QtWidgets.QMainWindow, AddStewardessPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def gotomainwindow(self):
+        self.new_window = mainPage()
+        self.new_window.show()
+        self.close()
+
+
+class addpilotpage(QtWidgets.QMainWindow, AddPilotPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def gotomainwindow(self):
+        self.new_window = mainPage()
+        self.new_window.show()
+        self.close()
 
 
 class stewardesspage(QtWidgets.QMainWindow, StewardessPage.Ui_MainWindow):
@@ -192,9 +252,33 @@ class addInformation(QtWidgets.QMainWindow, AddInformationPage.Ui_MainWindow):
         self.setupUi(self)
 
         self.back.clicked.connect(self.gotomainwindow)
+        self.add_pilot.clicked.connect(self.addpilot)
+        self.add_stewardess.clicked.connect(self.addstewardess)
+        self.add_client.clicked.connect(self.addclient)
+        self.add_airplane.clicked.connect(self.addairplane)
 
     def gotomainwindow(self):
         self.new_window = mainPage()
+        self.new_window.show()
+        self.close()
+
+    def addpilot(self):
+        self.new_window = addpilotpage()
+        self.new_window.show()
+        self.close()
+
+    def addstewardess(self):
+        self.new_window = addstewardesspage()
+        self.new_window.show()
+        self.close()
+
+    def addclient(self):
+        self.new_window = addclientpage()
+        self.new_window.show()
+        self.close()
+
+    def addairplane(self):
+        self.new_window = addairplanepage()
         self.new_window.show()
         self.close()
 
