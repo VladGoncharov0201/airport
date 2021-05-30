@@ -1,15 +1,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QWidget, QGridLayout
-
 import MainPage
 import PageThisTable
 import AddInformationPage
 import RemoveInformationPage
 import UpdateInformationPage
+import ClientsPage
 from db import connection
 
 
-class viewTable(QtWidgets.QMainWindow, PageThisTable.Ui_MainWindow):
+class clientpage(QtWidgets.QMainWindow, ClientsPage.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.new_window = None
@@ -49,6 +49,26 @@ class viewTable(QtWidgets.QMainWindow, PageThisTable.Ui_MainWindow):
             connect.close()
         except:
             print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = mainPage()
+        self.new_window.show()
+        self.close()
+
+
+class viewTable(QtWidgets.QMainWindow, PageThisTable.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.back.clicked.connect(self.gotomainwindow)
+        self.info_about_client.clicked.connect(self.open_info_about_client)
+
+    def open_info_about_client(self):
+        self.new_window = clientpage()
+        self.new_window.show()
+        self.close()
 
     def gotomainwindow(self):
         self.new_window = mainPage()
