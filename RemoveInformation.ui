@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Удаление записей</string>
+   <string>Добавление записей</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 239, 213)</string>
@@ -59,6 +59,72 @@
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="remove_pilot">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>160</y>
+      <width>951</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>17</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(176, 224, 230)</string>
+    </property>
+    <property name="text">
+     <string>Удаление данных из таблицы пилоты</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="remove_stewardess">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>290</y>
+      <width>951</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>17</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(176, 224, 230)</string>
+    </property>
+    <property name="text">
+     <string>Удаление данных из таблицы бортпроводники</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="remove_client">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>410</y>
+      <width>951</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Times New Roman</family>
+      <pointsize>17</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(176, 224, 230)</string>
+    </property>
+    <property name="text">
+     <string>Удаление данных из таблицы клиенты</string>
     </property>
    </widget>
   </widget>

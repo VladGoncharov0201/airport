@@ -14,9 +14,194 @@ import AddClientPage
 import AddTicketPage
 import UpdatePilotPage
 import UpdateStewardessPage
-import UpdateClientPage
 import UpdateTicketPage
+import RemovePilotPage
+import RemoveStewardessPage
+import RemoveClientPage
 from db import connection
+
+
+class removepilotpage(QtWidgets.QMainWindow, RemovePilotPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.showtable()
+        self.ok.clicked.connect(self.remove)
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def remove(self):
+        try:
+            surname = self.lineEdit_2.text()
+
+            connect = connection()
+            cursor = connect.cursor()
+
+            remove = "DELETE FROM airport.pilots WHERE pilots.surname='"+surname+"'"
+
+            cursor.execute(remove)
+            connect.commit()
+
+            cursor.close()
+            connect.close()
+
+            self.showtable()
+        except:
+            print("Такого человека не сущетсвует!")
+
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.pilots"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(6)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = removeInformation()
+        self.new_window.show()
+        self.close()
+
+
+class removestewardesspage(QtWidgets.QMainWindow, RemoveStewardessPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.showtable()
+        self.ok.clicked.connect(self.remove)
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def remove(self):
+        try:
+            surname = self.lineEdit_2.text()
+
+            connect = connection()
+            cursor = connect.cursor()
+
+            remove = "DELETE FROM airport.stewardesses WHERE stewardesses.surname='"+surname+"'"
+
+            cursor.execute(remove)
+            connect.commit()
+
+            cursor.close()
+            connect.close()
+
+            self.showtable()
+        except:
+            print("Такого человека не сущетсвует!")
+
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.stewardesses"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(5)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = removeInformation()
+        self.new_window.show()
+        self.close()
+
+
+class removeclientpage(QtWidgets.QMainWindow, RemoveClientPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.showtable()
+        self.ok.clicked.connect(self.remove)
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def remove(self):
+        try:
+            surname = self.lineEdit_2.text()
+
+            connect = connection()
+            cursor = connect.cursor()
+
+            remove = "DELETE FROM airport.passengers WHERE passengers.surname='"+surname+"'"
+
+            cursor.execute(remove)
+            connect.commit()
+
+            cursor.close()
+            connect.close()
+
+            self.showtable()
+        except:
+            print("Такого человека не сущетсвует!")
+
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.passengers"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(4)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = removeInformation()
+        self.new_window.show()
+        self.close()
 
 
 class updatepilotpage(QtWidgets.QMainWindow, UpdatePilotPage.Ui_MainWindow):
@@ -31,25 +216,31 @@ class updatepilotpage(QtWidgets.QMainWindow, UpdatePilotPage.Ui_MainWindow):
         self.back.clicked.connect(self.gotomainwindow)
 
     def update(self):
-        pilot_id = self.lineEdit.text()
-        surname = self.lineEdit_2.text()
-        name = self.lineEdit_3.text()
-        education = self.lineEdit_4.text()
-        experience = self.lineEdit_5.text()
-        phone = self.lineEdit_6.text()
+        try:
+            pilot_id = self.lineEdit.text()
+            surname = self.lineEdit_2.text()
+            name = self.lineEdit_3.text()
+            education = self.lineEdit_4.text()
+            experience = self.lineEdit_5.text()
+            phone = self.lineEdit_6.text()
 
-        connect = connection()
-        cursor = connect.cursor()
+            connect = connection()
+            cursor = connect.cursor()
 
-        update = ""
+            update = "UPDATE airport.pilots SET surname=%s, name=%s, education=%s," \
+                     " experience=%s, phone_number=%s WHERE pilot_id='"+pilot_id+"'"
 
-        cursor.execute(update)
-        connect.commit()
+            val = (surname, name, education, experience, phone)
 
-        cursor.close()
-        connect.close()
+            cursor.execute(update, val)
+            connect.commit()
 
-        self.showtable()
+            cursor.close()
+            connect.close()
+
+            self.showtable()
+        except:
+            print("Что-то пошло не так, попробуйте позже")
 
     def showtable(self):
         try:
@@ -89,8 +280,35 @@ class updatestewardesspage(QtWidgets.QMainWindow, UpdateStewardessPage.Ui_MainWi
         self.setupUi(self)
 
         self.showtable()
+        self.ok.clicked.connect(self.update)
 
         self.back.clicked.connect(self.gotomainwindow)
+
+    def update(self):
+        try:
+            stewardess_id = self.lineEdit.text()
+            surname = self.lineEdit_2.text()
+            name = self.lineEdit_3.text()
+            experience = self.lineEdit_5.text()
+            phone_number = self.lineEdit_6.text()
+
+            connect = connection()
+            cursor = connect.cursor()
+
+            update = "UPDATE airport.stewardesses SET surname=%s, name=%s, experience=%s," \
+                     " phone_number=%s WHERE stewardess_id='" + stewardess_id + "'"
+
+            val = (surname, name, experience, phone_number)
+
+            cursor.execute(update, val)
+            connect.commit()
+
+            cursor.close()
+            connect.close()
+
+            self.showtable()
+        except:
+            print("Что-то пошло не так, попробуйте позже")
 
     def showtable(self):
         try:
@@ -123,47 +341,6 @@ class updatestewardesspage(QtWidgets.QMainWindow, UpdateStewardessPage.Ui_MainWi
         self.close()
 
 
-class updateclientpage(QtWidgets.QMainWindow, UpdateClientPage.Ui_MainWindow):
-    def __init__(self):
-        super().__init__()
-        self.new_window = None
-        self.setupUi(self)
-
-        self.showtable()
-
-        self.back.clicked.connect(self.gotomainwindow)
-
-    def showtable(self):
-        try:
-            connect = connection()
-            cursor = connect.cursor()
-
-            select = "select * from airport.passengers"
-            cursor.execute(select)
-
-            records = cursor.fetchall()
-            rows = len(records)
-
-            self.tableWidget.setColumnCount(4)
-            self.tableWidget.setRowCount(rows)
-
-            col = 0
-            for i in records:
-                for a in i:
-                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
-                    col += 1
-
-            cursor.close()
-            connect.close()
-        except:
-            print("Произашла ошибка, попробуйет позже")
-
-    def gotomainwindow(self):
-        self.new_window = updateInformation()
-        self.new_window.show()
-        self.close()
-
-
 class updateticketpage(QtWidgets.QMainWindow, UpdateTicketPage.Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -173,8 +350,35 @@ class updateticketpage(QtWidgets.QMainWindow, UpdateTicketPage.Ui_MainWindow):
         self.showtable()
         self.set_flight_id()
         self.set_passenger_id()
+        self.ok.clicked.connect(self.update)
 
         self.back.clicked.connect(self.gotomainwindow)
+
+    def update(self):
+        try:
+            ticket_number = self.lineEdit_2.text()
+            flight_id = self.comboBox.currentText()
+            passenger_id = self.comboBox_2.currentText()
+            time = self.dateEdit.text()
+            seat = self.lineEdit_6.text()
+
+            connect = connection()
+            cursor = connect.cursor()
+
+            update = "UPDATE airport.tickets SET flight_id=%s, passenger_id=%s, time=%s," \
+                     " seat=%s WHERE ticket_number='" + ticket_number + "'"
+
+            val = (flight_id, passenger_id, time, seat)
+
+            cursor.execute(update, val)
+            connect.commit()
+
+            cursor.close()
+            connect.close()
+
+            self.showtable()
+        except:
+            print("Что-то пошло не так, попробуйте позже")
 
     def set_flight_id(self):
         connect = connection()
@@ -747,7 +951,25 @@ class removeInformation(QtWidgets.QMainWindow, RemoveInformationPage.Ui_MainWind
         self.new_window = None
         self.setupUi(self)
 
+        self.remove_pilot.clicked.connect(self.removepilot)
+        self.remove_stewardess.clicked.connect(self.removestewardess)
+        self.remove_client.clicked.connect(self.removeclient)
         self.back.clicked.connect(self.gotomainwindow)
+
+    def removepilot(self):
+        self.new_window = removepilotpage()
+        self.new_window.show()
+        self.close()
+
+    def removestewardess(self):
+        self.new_window = removestewardesspage()
+        self.new_window.show()
+        self.close()
+
+    def removeclient(self):
+        self.new_window = removeclientpage()
+        self.new_window.show()
+        self.close()
 
     def gotomainwindow(self):
         self.new_window = mainPage()
@@ -763,7 +985,6 @@ class updateInformation(QtWidgets.QMainWindow, UpdateInformationPage.Ui_MainWind
 
         self.update_pilot.clicked.connect(self.updatepilot)
         self.update_stewardess.clicked.connect(self.updatestewardess)
-        self.update_client.clicked.connect(self.updateclient)
         self.update_airplane.clicked.connect(self.updateairplane)
         self.back.clicked.connect(self.gotomainwindow)
 
@@ -774,11 +995,6 @@ class updateInformation(QtWidgets.QMainWindow, UpdateInformationPage.Ui_MainWind
 
     def updatestewardess(self):
         self.new_window = updatestewardesspage()
-        self.new_window.show()
-        self.close()
-
-    def updateclient(self):
-        self.new_window = updateclientpage()
         self.new_window.show()
         self.close()
 
