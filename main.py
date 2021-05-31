@@ -120,7 +120,30 @@ class addclientpage(QtWidgets.QMainWindow, AddClientPage.Ui_MainWindow):
 
         self.showtable()
 
+        self.ok.clicked.connect(self.add)
         self.back.clicked.connect(self.gotomainwindow)
+
+    def add(self):
+        passenger_id = self.lineEdit.text()
+        surname = self.lineEdit_2.text()
+        name = self.lineEdit_3.text()
+        passport_data = self.lineEdit_6.text()
+
+        connect = connection()
+        cursor = connect.cursor()
+
+        insert = "INSERT INTO airport.passengers (passenger_id, surname, name, passport_data)" \
+                 " VALUES(%s, %s, %s, %s)"
+        value = (passenger_id, surname, name, passport_data)
+
+        cursor.execute(insert, value)
+
+        connect.commit()
+
+        cursor.close()
+        connect.close()
+
+        self.showtable()
 
     def showtable(self):
         try:
@@ -161,7 +184,31 @@ class addstewardesspage(QtWidgets.QMainWindow, AddStewardessPage.Ui_MainWindow):
 
         self.showtable()
 
+        self.ok.clicked.connect(self.add)
         self.back.clicked.connect(self.gotomainwindow)
+
+    def add(self):
+        stewardess_id = self.lineEdit.text()
+        surname = self.lineEdit_2.text()
+        name = self.lineEdit_3.text()
+        experience = self.lineEdit_5.text()
+        phone_number = self.lineEdit_6.text()
+
+        connect = connection()
+        cursor = connect.cursor()
+
+        insert = "INSERT INTO airport.stewardesses (stewardess_id, surname, name, experience, phone_number)" \
+                 " VALUES(%s, %s, %s, %s, %s)"
+        value = (stewardess_id, surname, name, experience, phone_number)
+
+        cursor.execute(insert, value)
+
+        connect.commit()
+
+        cursor.close()
+        connect.close()
+
+        self.showtable()
 
     def showtable(self):
         try:
