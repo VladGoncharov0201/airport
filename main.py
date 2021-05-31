@@ -12,7 +12,229 @@ import AddPilotPage
 import AddStewardessPage
 import AddClientPage
 import AddTicketPage
+import UpdatePilotPage
+import UpdateStewardessPage
+import UpdateClientPage
+import UpdateTicketPage
 from db import connection
+
+
+class updatepilotpage(QtWidgets.QMainWindow, UpdatePilotPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.showtable()
+        self.ok.clicked.connect(self.update)
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def update(self):
+        pilot_id = self.lineEdit.text()
+        surname = self.lineEdit_2.text()
+        name = self.lineEdit_3.text()
+        education = self.lineEdit_4.text()
+        experience = self.lineEdit_5.text()
+        phone = self.lineEdit_6.text()
+
+        connect = connection()
+        cursor = connect.cursor()
+
+        update = ""
+
+        cursor.execute(update)
+        connect.commit()
+
+        cursor.close()
+        connect.close()
+
+        self.showtable()
+
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.pilots"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(6)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = updateInformation()
+        self.new_window.show()
+        self.close()
+
+
+class updatestewardesspage(QtWidgets.QMainWindow, UpdateStewardessPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.showtable()
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.stewardesses"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(5)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = updateInformation()
+        self.new_window.show()
+        self.close()
+
+
+class updateclientpage(QtWidgets.QMainWindow, UpdateClientPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.showtable()
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.passengers"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(4)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = updateInformation()
+        self.new_window.show()
+        self.close()
+
+
+class updateticketpage(QtWidgets.QMainWindow, UpdateTicketPage.Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.new_window = None
+        self.setupUi(self)
+
+        self.showtable()
+        self.set_flight_id()
+        self.set_passenger_id()
+
+        self.back.clicked.connect(self.gotomainwindow)
+
+    def set_flight_id(self):
+        connect = connection()
+        cursor = connect.cursor()
+
+        select = "select flight_id from airport.flights"
+        cursor.execute(select)
+
+        records = cursor.fetchall()
+
+        for i in records:
+            self.comboBox.addItems(i)
+
+        cursor.close()
+        connect.close()
+
+    def set_passenger_id(self):
+        connect = connection()
+        cursor = connect.cursor()
+
+        select = "select passenger_id from airport.passengers"
+        cursor.execute(select)
+
+        records = cursor.fetchall()
+
+        for i in records:
+            self.comboBox_2.addItems(i)
+
+        cursor.close()
+        connect.close()
+
+    def showtable(self):
+        try:
+            connect = connection()
+            cursor = connect.cursor()
+
+            select = "select * from airport.tickets"
+            cursor.execute(select)
+
+            records = cursor.fetchall()
+            rows = len(records)
+
+            self.tableWidget.setColumnCount(5)
+            self.tableWidget.setRowCount(rows)
+
+            col = 0
+            for i in records:
+                for a in i:
+                    self.tableWidget.setItem(0, col, QTableWidgetItem(str(a)))
+                    col += 1
+
+            cursor.close()
+            connect.close()
+        except:
+            print("Произашла ошибка, попробуйет позже")
+
+    def gotomainwindow(self):
+        self.new_window = updateInformation()
+        self.new_window.show()
+        self.close()
 
 
 class addaticketpage(QtWidgets.QMainWindow, AddTicketPage.Ui_MainWindow):
@@ -539,7 +761,31 @@ class updateInformation(QtWidgets.QMainWindow, UpdateInformationPage.Ui_MainWind
         self.new_window = None
         self.setupUi(self)
 
+        self.update_pilot.clicked.connect(self.updatepilot)
+        self.update_stewardess.clicked.connect(self.updatestewardess)
+        self.update_client.clicked.connect(self.updateclient)
+        self.update_airplane.clicked.connect(self.updateairplane)
         self.back.clicked.connect(self.gotomainwindow)
+
+    def updatepilot(self):
+        self.new_window = updatepilotpage()
+        self.new_window.show()
+        self.close()
+
+    def updatestewardess(self):
+        self.new_window = updatestewardesspage()
+        self.new_window.show()
+        self.close()
+
+    def updateclient(self):
+        self.new_window = updateclientpage()
+        self.new_window.show()
+        self.close()
+
+    def updateairplane(self):
+        self.new_window = updateticketpage()
+        self.new_window.show()
+        self.close()
 
     def gotomainwindow(self):
         self.new_window = mainPage()

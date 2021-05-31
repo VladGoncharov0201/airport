@@ -55,98 +55,130 @@
      </font>
     </property>
     <property name="text">
-     <string>Обновление данных в таблицу </string>
+     <string>Обновление данных в таблицу &quot;tickets&quot;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="update_pilot">
+   <widget class="QLineEdit" name="lineEdit_6">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>600</x>
       <y>160</y>
-      <width>951</width>
-      <height>61</height>
+      <width>113</width>
+      <height>41</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Times New Roman</family>
-      <pointsize>17</pointsize>
-     </font>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(176, 224, 230)</string>
-    </property>
-    <property name="text">
-     <string>Обновить таблицу пилоты</string>
+    <property name="placeholderText">
+     <string>seat</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="update_stewardess">
+   <widget class="QPushButton" name="ok">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>290</y>
-      <width>951</width>
-      <height>61</height>
+      <x>750</x>
+      <y>160</y>
+      <width>111</width>
+      <height>41</height>
      </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Times New Roman</family>
-      <pointsize>17</pointsize>
-     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(176, 224, 230)</string>
     </property>
     <property name="text">
-     <string>Обновить таблицу бортпроводники</string>
+     <string>Обновить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="update_client">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>410</y>
-      <width>951</width>
-      <height>61</height>
+      <x>290</x>
+      <y>230</y>
+      <width>511</width>
+      <height>361</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Times New Roman</family>
-      <pointsize>17</pointsize>
-     </font>
+    <column>
+     <property name="text">
+      <string>ticket_number</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>flight_id</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>passenger_id</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>time</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>seat</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>160</y>
+      <width>113</width>
+      <height>41</height>
+     </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(176, 224, 230)</string>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
-    <property name="text">
-     <string>Обновить таблицу клиенты</string>
+    <property name="placeholderText">
+     <string>ticket_number</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="update_airplane">
+   <widget class="QDateEdit" name="dateEdit">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>530</y>
-      <width>951</width>
-      <height>61</height>
+      <x>460</x>
+      <y>160</y>
+      <width>110</width>
+      <height>41</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Times New Roman</family>
-      <pointsize>17</pointsize>
-     </font>
+    <property name="date">
+     <date>
+      <year>2021</year>
+      <month>5</month>
+      <day>31</day>
+     </date>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(176, 224, 230)</string>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>160</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
     </property>
-    <property name="text">
-     <string>Обновить таблицу билеты</string>
+   </widget>
+   <widget class="QComboBox" name="comboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>160</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
     </property>
    </widget>
   </widget>
