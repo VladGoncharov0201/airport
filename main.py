@@ -11,32 +11,88 @@ import StewardessPage
 import AddPilotPage
 import AddStewardessPage
 import AddClientPage
-import AddAirplanePage
+import AddTicketPage
 from db import connection
 
 
-class addairplanepage(QtWidgets.QMainWindow, AddAirplanePage.Ui_MainWindow):
+class addaticketpage(QtWidgets.QMainWindow, AddTicketPage.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.new_window = None
         self.setupUi(self)
 
         self.showtable()
+        self.set_flight_id()
+        self.set_passenger_id()
 
+        self.ok.clicked.connect(self.add)
         self.back.clicked.connect(self.gotomainwindow)
+
+    def add(self):
+        ticket_number = self.lineEdit_2.text()
+        flight_id = self.comboBox.currentText()
+        passenger_id = self.comboBox_2.currentText()
+        time = self.dateEdit.text()
+        seat = self.lineEdit_6.text()
+
+        connect = connection()
+        cursor = connect.cursor()
+
+        insert = "INSERT INTO airport.tickets (ticket_number, flight_id, passenger_id, time, seat)" \
+                 " VALUES(%s, %s, %s, %s, %s)"
+        value = (ticket_number, flight_id, passenger_id, time, seat)
+
+        cursor.execute(insert, value)
+
+        connect.commit()
+
+        cursor.close()
+        connect.close()
+
+        self.showtable()
+
+    def set_flight_id(self):
+        connect = connection()
+        cursor = connect.cursor()
+
+        select = "select flight_id from airport.flights"
+        cursor.execute(select)
+
+        records = cursor.fetchall()
+
+        for i in records:
+            self.comboBox.addItems(i)
+
+        cursor.close()
+        connect.close()
+
+    def set_passenger_id(self):
+        connect = connection()
+        cursor = connect.cursor()
+
+        select = "select passenger_id from airport.passengers"
+        cursor.execute(select)
+
+        records = cursor.fetchall()
+
+        for i in records:
+            self.comboBox_2.addItems(i)
+
+        cursor.close()
+        connect.close()
 
     def showtable(self):
         try:
             connect = connection()
             cursor = connect.cursor()
 
-            select = "select * from airport.airplanes"
+            select = "select * from airport.tickets"
             cursor.execute(select)
 
             records = cursor.fetchall()
             rows = len(records)
 
-            self.tableWidget.setColumnCount(3)
+            self.tableWidget.setColumnCount(5)
             self.tableWidget.setRowCount(rows)
 
             col = 0
@@ -411,7 +467,7 @@ class addInformation(QtWidgets.QMainWindow, AddInformationPage.Ui_MainWindow):
         self.close()
 
     def addairplane(self):
-        self.new_window = addairplanepage()
+        self.new_window = addaticketpage()
         self.new_window.show()
         self.close()
 

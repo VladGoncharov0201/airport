@@ -79,4 +79,4 @@ class Ui_MainWindow(object):
         self.add_pilot.setText(_translate("MainWindow", "Добавить пилота"))
         self.add_stewardess.setText(_translate("MainWindow", "Добавить бортпроводника"))
         self.add_client.setText(_translate("MainWindow", "Добавить клиента"))
-        self.add_airplane.setText(_translate("MainWindow", "Добавить самолет"))
+        self.add_airplane.setText(_translate("MainWindow", "Добавить билет"))

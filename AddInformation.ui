@@ -146,7 +146,7 @@
      <string notr="true">background-color: rgb(176, 224, 230)</string>
     </property>
     <property name="text">
-     <string>Добавить самолет</string>
+     <string>Добавить билет</string>
     </property>
    </widget>
   </widget>

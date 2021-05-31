@@ -55,42 +55,10 @@
      </font>
     </property>
     <property name="text">
-     <string>Добавление данных в таблицу &quot;airplanes&quot;</string>
+     <string>Добавление данных в таблицу &quot;tickets&quot;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>160</y>
-      <width>113</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>airplane_id</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>160</y>
-      <width>113</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>name</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_6">
@@ -106,7 +74,7 @@
      <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
-     <string>year_of_issue</string>
+     <string>seat</string>
     </property>
    </widget>
    <widget class="QPushButton" name="ok">
@@ -128,27 +96,90 @@
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>290</x>
       <y>230</y>
-      <width>321</width>
+      <width>511</width>
       <height>361</height>
      </rect>
     </property>
     <column>
      <property name="text">
-      <string>airplane_id</string>
+      <string>ticket_number</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>name</string>
+      <string>flight_id</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>year_of_issue</string>
+      <string>passenger_id</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>time</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>seat</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>160</y>
+      <width>113</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>ticket_number</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="dateEdit">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>160</y>
+      <width>110</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="date">
+     <date>
+      <year>2021</year>
+      <month>5</month>
+      <day>31</day>
+     </date>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>160</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>160</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
    </widget>
   </widget>
  </widget>
